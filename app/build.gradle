@@ -6,7 +6,7 @@ android {
 
     defaultConfig {
         applicationId "com.example.android.meat_timealpha10"
-        minSdkVersion 15
+        minSdkVersion 17
         targetSdkVersion 25
         versionCode 1
         versionName "1.0"
@@ -21,6 +21,8 @@ android {
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
+    compile 'com.android.support:customtabs:25.3.0'
     compile 'com.android.support:appcompat-v7:25.3.1'
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
@@ -28,8 +30,6 @@ dependencies {
     compile 'com.android.support:support-v4:25.3.1'
     compile 'com.google.code.gson:gson:2.3'
     compile 'com.facebook.android:facebook-android-sdk:[4,5)'
+    compile 'com.android.support:customtabs:25.3.0'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.6.0'
-    compile 'com.android.support:customtabs:25.3.0'
-    compile 'com.facebook.android:facebook-android-sdk:[4,5)'
-    compile 'com.android.support:customtabs:25.3.0'
 }

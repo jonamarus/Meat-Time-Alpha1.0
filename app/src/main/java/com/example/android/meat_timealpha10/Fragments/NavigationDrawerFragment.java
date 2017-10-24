@@ -119,6 +119,7 @@ public class NavigationDrawerFragment extends Fragment {
 
     private void addItemsToDataList() {
         dataList.add(new DrawerItem("Account", R.drawable.ic_account));
+        dataList.add(new DrawerItem("Planning", R.drawable.ic_account));
 
     }
 

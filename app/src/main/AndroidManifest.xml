@@ -25,6 +25,12 @@
             android:exported="true"
             >
         </activity>
+        <activity
+            android:name=".Activities.PlanningDayActivity"
+            android:label="@string/togglemode"
+            android:exported="true"
+            >
+        </activity>
         <activity android:name="com.facebook.FacebookActivity"
                   android:configChanges=
                       "keyboard|keyboardHidden|screenLayout|screenSize|orientation"
