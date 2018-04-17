@@ -39,6 +39,8 @@
 
     <string name="email_header">jonathan.marboux@telenet.be</string>
     <string name="naam_header">Jonathan Marboux</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 
     <string name="action_example">Example action</string>
 
