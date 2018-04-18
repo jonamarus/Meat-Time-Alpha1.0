@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <item android:id="@+id/home" android:title="Start" android:icon="@drawable/ic_nav_ic_home"></item>
+    <item android:id="@+id/home" android:title="Home" android:icon="@drawable/ic_nav_ic_home"></item>
     <item android:id="@+id/planning" android:title="Planning" android:icon="@drawable/ic_nav_ic_planning"></item>
     <item android:id="@+id/meal" android:title="Maaltijd-o-matic" android:icon="@drawable/ic_nav_ic_meal"></item>
     <item android:id="@+id/recipes" android:title="Recepten" android:icon="@drawable/ic_nav_ic_recipe"></item>
