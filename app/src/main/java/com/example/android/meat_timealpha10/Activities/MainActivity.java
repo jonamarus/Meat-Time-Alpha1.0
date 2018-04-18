@@ -1,19 +1,24 @@
 package com.example.android.meat_timealpha10.Activities;
 
+
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.net.Network;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.app.FragmentManager;
+import android.view.View;
 
 import com.example.android.meat_timealpha10.Fragments.extra;
 import com.example.android.meat_timealpha10.Fragments.foodOmatic;
+
 import com.example.android.meat_timealpha10.Fragments.home;
 import com.example.android.meat_timealpha10.Fragments.logoff;
 import com.example.android.meat_timealpha10.Fragments.options;
@@ -50,44 +55,44 @@ public class MainActivity extends AppCompatActivity {
 
     public void selectItemDrawer (MenuItem menuItem){
         android.support.v4.app.Fragment myFragment = null;
-        Class fragmentClass;
+
         switch (menuItem.getItemId()){
             case R.id.home:
-                fragmentClass= home.class;
+                myFragment= new home();
                 break;
             case R.id.planning:
-                fragmentClass= planning.class;
+                myFragment= new planning();
                 break;
             case R.id.meal:
-                fragmentClass= foodOmatic.class;
+                myFragment= new foodOmatic();
                 break;
             case R.id.recipes:
-                fragmentClass= recipes.class;
+                myFragment= new recipes();
                 break;
             case R.id.extra:
-                fragmentClass= extra.class;
+                myFragment= new extra();
                 break;
             case R.id.options:
-                fragmentClass= options.class;
+                myFragment= new options();
                 break;
             case R.id.logout:
-                fragmentClass= logoff.class;
+                myFragment= new logoff();;
                 break;
 
             default:
-                fragmentClass = home.class;
+
 
         }
-        try {
-            myFragment = (android.support.v4.app.Fragment) fragmentClass.newInstance();
+        if (myFragment != null) {
+
+
+            android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
+            FragmentTransaction myFragmentTransaction = fragmentManager.beginTransaction();
+            myFragmentTransaction.replace(R.id.flcontent, myFragment);
+            myFragmentTransaction.addToBackStack(null);
+            myFragmentTransaction.commit();
 
         }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
-        android.support.v4.app.FragmentManager fragmentManager = getSupportFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.flcontent,myFragment).commit();
-        menuItem.setChecked(true);
         setTitle(menuItem.getTitle());
         mDrawerLayout.closeDrawers();
     }
