@@ -21,6 +21,7 @@ import com.example.android.meat_timealpha10.Models.TokenModel;
 import com.example.android.meat_timealpha10.R;
 import com.example.android.meat_timealpha10.RestService.RestClient;
 import com.example.android.meat_timealpha10.RestService.RestService;
+import com.example.android.meat_timealpha10.helpers.HelperMethods;
 import com.example.android.meat_timealpha10.helpers.TokenHelper;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -88,7 +89,7 @@ public class LoginActivity extends FragmentActivity implements Validator.Validat
     fbLoginBtn.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
       @Override
       public void onSuccess(LoginResult loginResult) {
-        facebookLogin(loginResult.getAccessToken().toString());
+        facebookLogin(loginResult.getAccessToken().getToken());
         Log.d("FACEBOOK", loginResult.getAccessToken().getToken());
       }
 
@@ -102,6 +103,9 @@ public class LoginActivity extends FragmentActivity implements Validator.Validat
 
       }
     });
+    if (HelperMethods.isLoggedIn(context)){
+      toMainActivity();
+    }
   }
 
   public void facebookLogin(String accessToken){
@@ -207,6 +211,14 @@ public class LoginActivity extends FragmentActivity implements Validator.Validat
   }
 
   @Override
+  protected void onResume() {
+    super.onResume();
+    if (HelperMethods.isLoggedIn(context)){
+      toMainActivity();
+    }
+  }
+
+  @Override
   public void onValidationFailed(List<ValidationError> errors) {
     for (ValidationError error : errors) {
       View view = error.getView();
@@ -220,4 +232,11 @@ public class LoginActivity extends FragmentActivity implements Validator.Validat
       }
     }
   }
+
+  private void toMainActivity(){
+    Intent intent = new Intent(context, MainActivity.class);
+    startActivity(intent);
+  }
+
+
 }
