@@ -19,8 +19,8 @@
 
     // strings for Password recovery
 
-    <string name="pwrecovery">Password Recovery</string>
-    <string name="e_mail">Enter your e-mail here</string>
+    <string name="pwreset">Password Reset</string>
+    <string name="e_mail">Email</string>
     <string name="send_pwd">Send</string>
     <string name="cancel">Cancel</string>
 
@@ -28,29 +28,33 @@
 
     <string name="register">Register</string>
     <string name="registration">Registration</string>
-    <string name="first_name">first name</string>
-    <string name="last_name">last name</string>
-    <string name="register_pw">password</string>
-    <string name="rep_register_pw">repeat password</string>
-    <string name="register_mail">e-mail</string>
+    <string name="first_name">First name</string>
+    <string name="last_name">Last name</string>
+    <string name="register_pw">Password</string>
+    <string name="rep_register_pw">Repeat password</string>
+    <string name="register_mail">E-mail</string>
     <string name="title_activity_main">MainActivity</string>
 
     // Drawer
 
-    <string name="title_section1">Section 1</string>
-    <string name="title_section2">Section 2</string>
-    <string name="title_section3">Section 3</string>
-
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="drawer_open">Open drawer</string>
-    <string name="drawer_close">Close drawer</string>
-    <string name="drawer_text_account">Account</string>
+    <string name="email_header">jonathan.marboux@telenet.be</string>
+    <string name="naam_header">Jonathan Marboux</string>
+    <string name="open">Open</string>
+    <string name="close">Close</string>
 
     <string name="action_example">Example action</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="sendButton">Send</string>
+    <string name="reset_token">Reset Token</string>
+    <string name="pwreset_new_password">New Password</string>
+    <string name="pwreset_repeat_password">Repeat Password</string>
+    <string name="pwrecovery_text">Please enter your emailadres to recieve the password reset token</string>
 
+    <string name="title_activity_register_acctivity">RegisterAcctivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="banner">Banner</string>
 
 </resources>
