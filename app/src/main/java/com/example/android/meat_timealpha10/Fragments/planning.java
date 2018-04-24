@@ -1,14 +1,23 @@
 package com.example.android.meat_timealpha10.Fragments;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.DatePicker;
+import android.widget.TextView;
 
 import com.example.android.meat_timealpha10.R;
+
+import java.text.DateFormat;
+import java.util.Calendar;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -18,7 +27,7 @@ import com.example.android.meat_timealpha10.R;
  * Use the {@link planning#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class planning extends Fragment {
+public class planning extends Fragment implements DatePickerDialog.OnDateSetListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -52,6 +61,8 @@ public class planning extends Fragment {
         return fragment;
     }
 
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,13 +70,52 @@ public class planning extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
+    }
+
+
+    @Override
+    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR,year);
+        c.set(Calendar.MONTH,month);
+        c.set(Calendar.DAY_OF_MONTH,day);
+
+        String currentDateString = DateFormat.getDateInstance().format(c.getTime());
+        TextView textView = getView().findViewById(R.id.textView);
+        textView.setText(currentDateString);
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.fragment_planning,
+                container, false);
+        Button button = (Button)view.findViewById(R.id.button);
+        button.setOnClickListener(new View.OnClickListener() {
+                                      @Override
+                                      public void onClick(View v) {
+                                        DialogFragment datePicker = new DatePickerFragment();
+                                        datePicker.show(getFragmentManager(), "date picker");
+                                      }
+                                      });
+
+
+        FragmentTransaction ft = getChildFragmentManager().beginTransaction();
+        DatePickerFragment datepicker = new DatePickerFragment();
+        ft.replace(R.id.date_picker, datepicker);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.addToBackStack(null);
+        ft.commit();
+                // vervangen fragment
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_planning, container, false);
+
+
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event

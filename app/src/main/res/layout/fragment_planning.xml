@@ -1,15 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".Fragments.planning">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Planning"
-        android:textSize="60sp"/> />
 
-</FrameLayout>
+    <!-- TODO: Update blank fragment layout -->
+    <FrameLayout
+        android:id="@+id/date_picker"
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="open date picker"
+        android:clickable="true" />
+
+    </FrameLayout>
+
+
+    <TextView
+        android:layout_width="50dp"
+        android:layout_height="50dp" />
+
+
+</LinearLayout>

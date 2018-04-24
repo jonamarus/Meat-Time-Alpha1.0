@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
 
         switch (menuItem.getItemId()){
             case R.id.home:
-                myFragment= new home();
+                myFragment= new  home();
                 break;
             case R.id.planning:
                 myFragment= new planning();
