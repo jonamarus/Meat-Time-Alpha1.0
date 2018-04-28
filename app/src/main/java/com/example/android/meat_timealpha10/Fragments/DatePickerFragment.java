@@ -5,10 +5,16 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
+import android.widget.DatePicker;
+import android.widget.TextView;
 
+import com.example.android.meat_timealpha10.Activities.MainActivity;
+import com.example.android.meat_timealpha10.R;
+
+import java.text.DateFormat;
 import java.util.Calendar;
 
-public class DatePickerFragment extends DialogFragment {
+public class DatePickerFragment extends DialogFragment implements DatePickerDialog.OnDateSetListener{
     @NonNull
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
@@ -16,7 +22,18 @@ public class DatePickerFragment extends DialogFragment {
         int year = c.get(Calendar.YEAR);
         int month = c.get(Calendar.MONTH);
         int day = c.get(Calendar.DAY_OF_MONTH);
-
-        return new DatePickerDialog(getActivity(), (DatePickerDialog.OnDateSetListener) getActivity(), year, month, day );
+        return new DatePickerDialog(getActivity(), this, year, month, day );
     }
+
+    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR,year);
+        c.set(Calendar.MONTH,month);
+        c.set(Calendar.DAY_OF_MONTH,day);
+        String dateis=day + '-' + month+1 + "-" + year;
+
+
+    }
+
+
 }

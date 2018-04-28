@@ -7,26 +7,25 @@
     tools:context=".Fragments.planning">
 
 
-    <!-- TODO: Update blank fragment layout -->
-    <FrameLayout
-        android:id="@+id/date_picker"
-        android:layout_width="match_parent"
-        android:layout_height="100dp">
-
-
     <Button
-        android:id="@+id/button"
+        android:id="@+id/chooseDate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="open date picker"
-        android:clickable="true" />
-
-    </FrameLayout>
-
+        android:textSize="20sp"
+        android:hint="touch here to select date" />
 
     <TextView
-        android:layout_width="50dp"
-        android:layout_height="50dp" />
+        android:id="@+id/date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/blue"
+        />
+
+
+
+
+
+
 
 
 </LinearLayout>

@@ -27,7 +27,7 @@ import java.util.Calendar;
  * Use the {@link planning#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class planning extends Fragment implements DatePickerDialog.OnDateSetListener{
+public class planning extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -75,17 +75,7 @@ public class planning extends Fragment implements DatePickerDialog.OnDateSetList
     }
 
 
-    @Override
-    public void onDateSet(DatePicker datePicker, int year, int month, int day) {
-        Calendar c = Calendar.getInstance();
-        c.set(Calendar.YEAR,year);
-        c.set(Calendar.MONTH,month);
-        c.set(Calendar.DAY_OF_MONTH,day);
 
-        String currentDateString = DateFormat.getDateInstance().format(c.getTime());
-        TextView textView = getView().findViewById(R.id.textView);
-        textView.setText(currentDateString);
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -93,26 +83,23 @@ public class planning extends Fragment implements DatePickerDialog.OnDateSetList
 
         View view = inflater.inflate(R.layout.fragment_planning,
                 container, false);
-        Button button = (Button)view.findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener() {
+        Button chooseDate = (Button)view.findViewById(R.id.chooseDate);
+        TextView date = (TextView)view.findViewById(R.id.date);
+
+
+        chooseDate.setOnClickListener(new View.OnClickListener() {
                                       @Override
                                       public void onClick(View v) {
                                         DialogFragment datePicker = new DatePickerFragment();
-                                        datePicker.show(getFragmentManager(), "date picker");
+                                        datePicker.show(getChildFragmentManager(), "date picker");
                                       }
                                       });
 
 
-        FragmentTransaction ft = getChildFragmentManager().beginTransaction();
-        DatePickerFragment datepicker = new DatePickerFragment();
-        ft.replace(R.id.date_picker, datepicker);
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        ft.addToBackStack(null);
-        ft.commit();
-                // vervangen fragment
 
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_planning, container, false);
+
+
+        return view;
 
 
 
