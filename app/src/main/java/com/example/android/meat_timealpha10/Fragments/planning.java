@@ -27,7 +27,7 @@ import java.util.Calendar;
  * Use the {@link planning#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class planning extends Fragment {
+public class planning extends Fragment implements DatePickerDialog.OnDateSetListener{
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -42,6 +42,8 @@ public class planning extends Fragment {
     public planning() {
         // Required empty public constructor
     }
+
+
 
     /**
      * Use this factory method to create a new instance of
@@ -72,8 +74,8 @@ public class planning extends Fragment {
         }
 
 
-    }
 
+    }
 
 
 
@@ -83,27 +85,37 @@ public class planning extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_planning,
                 container, false);
-        Button chooseDate = (Button)view.findViewById(R.id.chooseDate);
-        TextView date = (TextView)view.findViewById(R.id.date);
+        final Button chooseDate = (Button)view.findViewById(R.id.chooseDate);
+
+
+
 
 
         chooseDate.setOnClickListener(new View.OnClickListener() {
                                       @Override
                                       public void onClick(View v) {
+
                                         DialogFragment datePicker = new DatePickerFragment();
                                         datePicker.show(getChildFragmentManager(), "date picker");
+
                                       }
                                       });
 
-
-
-
-
         return view;
+    }
 
-
+    @Override
+    public void onDateSet(DatePicker view, int year, int month, int day) {
+        Calendar c = Calendar.getInstance();
+        c.set(Calendar.YEAR, year);
+        c.set(Calendar.MONTH, month);
+        c.set(Calendar.DAY_OF_MONTH, day);
+        String currentDateString = DateFormat.getDateInstance(DateFormat.FULL).format(c.getTime());
+        TextView date = getView().findViewById(R.id.dateGiven);
+        date.setText(currentDateString);
 
     }
+
 
     // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
