@@ -1,12 +1,15 @@
 package com.example.android.meat_timealpha10.Fragments;
 
+import android.app.ActionBar;
 import android.app.DatePickerDialog;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -77,6 +80,9 @@ public class planning extends Fragment implements DatePickerDialog.OnDateSetList
 
     }
 
+    private TabLayout tabLayout ;
+    private ViewPager viewPager;
+    private ViewPagerAdapter adapter;
 
 
     @Override
@@ -87,10 +93,7 @@ public class planning extends Fragment implements DatePickerDialog.OnDateSetList
                 container, false);
         final Button chooseDate = (Button)view.findViewById(R.id.chooseDate);
 
-
-
-
-
+        // Code for setting the date with calendar
         chooseDate.setOnClickListener(new View.OnClickListener() {
                                       @Override
                                       public void onClick(View v) {
@@ -100,6 +103,31 @@ public class planning extends Fragment implements DatePickerDialog.OnDateSetList
 
                                       }
                                       });
+
+        //code for the tablayout
+
+        tabLayout = (TabLayout)view.findViewById(R.id.planning_tabs);
+        viewPager = (ViewPager)view.findViewById(R.id.viewpager);
+        adapter = new ViewPagerAdapter(getChildFragmentManager());
+
+        // add Fragment Here
+
+        adapter.addFragment(new PlanningListItemFragment(),"Breakfast");
+        adapter.addFragment(new PlanningListItemFragment(),"Lunch");
+        adapter.addFragment(new PlanningListItemFragment(),"Dinner");
+        // set Icons to tabs
+
+        // tablayout.getTabAt(0).setIcon(R.drawable.X1):
+        // tablayout.getTabAt(1).setIcon(R.drawable.X2):
+        // tablayout.getTabAt(2).setIcon(R.drawable.X3):
+
+        viewPager.setAdapter(adapter);
+        tabLayout.setupWithViewPager(viewPager);
+
+        // remove shadow from the action bar
+        // ActionBar actionBar = getSupportActionbar();
+        // actionBar.setElevation(0);
+
 
         return view;
     }
@@ -121,6 +149,7 @@ public class planning extends Fragment implements DatePickerDialog.OnDateSetList
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
+
         }
     }
 

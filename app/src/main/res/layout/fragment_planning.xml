@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     tools:context=".Fragments.planning">
 
@@ -15,21 +16,42 @@
         android:layout_gravity="center"
         android:layout_marginBottom="5dp"
         android:elevation="0dp"
-        android:hint="touch here to select date"
+        android:hint="Tap to select a date!"
+        android:textColorHint="@color/blue"
 
         android:textSize="20sp" />
 
     <TextView
         android:id="@+id/dateGiven"
+        android:textAlignment="center"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:textColor="@color/blue" />
 
+    <android.support.v7.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
 
 
+    <android.support.design.widget.TabLayout
+        android:id="@+id/planning_tabs"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:tabMode="fixed"
+        app:tabGravity="fill"
+        app:tabTextColor="@color/blue"
+        app:tabSelectedTextColor="@color/blue"
+        />
+
+    <android.support.v4.view.ViewPager
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:id="@+id/viewpager">
 
 
-
+    </android.support.v4.view.ViewPager>
+    </android.support.v7.widget.LinearLayoutCompat>
 
 </LinearLayout>
