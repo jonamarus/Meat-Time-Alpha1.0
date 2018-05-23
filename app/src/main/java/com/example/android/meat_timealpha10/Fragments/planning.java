@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.DialogFragment;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -108,7 +109,8 @@ public class planning extends Fragment implements DatePickerDialog.OnDateSetList
 
         tabLayout = (TabLayout)view.findViewById(R.id.planning_tabs);
         viewPager = (ViewPager)view.findViewById(R.id.viewpager);
-        adapter = new ViewPagerAdapter(getChildFragmentManager());
+        FragmentManager cfManager = getChildFragmentManager();
+        adapter = new ViewPagerAdapter(cfManager);
 
         // add Fragment Here
 

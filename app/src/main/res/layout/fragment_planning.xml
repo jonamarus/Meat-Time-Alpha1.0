@@ -30,7 +30,8 @@
 
     <android.support.v7.widget.LinearLayoutCompat
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="vertical">
 
 
 
@@ -38,7 +39,6 @@
         android:id="@+id/planning_tabs"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/white"
         app:tabMode="fixed"
         app:tabGravity="fill"
         app:tabTextColor="@color/blue"
