@@ -114,9 +114,9 @@ public class planning extends Fragment implements DatePickerDialog.OnDateSetList
 
         // add Fragment Here
 
-        adapter.addFragment(new PlanningListItemFragment(),"Breakfast");
-        adapter.addFragment(new PlanningListItemFragment(),"Lunch");
-        adapter.addFragment(new PlanningListItemFragment(),"Dinner");
+        adapter.addFragment(new PlanningListItemFragment(),"Breakfast", "Breakfast");
+        adapter.addFragment(new PlanningListItemFragment(),"Lunch", "Lunch");
+        adapter.addFragment(new PlanningListItemFragment(),"Dinner", "Dinner");
         // set Icons to tabs
 
         // tablayout.getTabAt(0).setIcon(R.drawable.X1):

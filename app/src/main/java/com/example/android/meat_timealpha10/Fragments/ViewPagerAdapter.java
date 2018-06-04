@@ -12,6 +12,7 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
 
     private final List<Fragment> lstFragment = new ArrayList<>();
     private  final List<String> lstTitles = new ArrayList<>();
+    private final List<String> lstMealType = new ArrayList<>();
     public ViewPagerAdapter(FragmentManager fm) {
         super(fm);
     }
@@ -28,15 +29,17 @@ public class ViewPagerAdapter extends FragmentPagerAdapter {
     }
 
 
+    public String getMealType() {return lstMealType.toString();}
     @Override
     public CharSequence getPageTitle(int position) {
         return lstTitles.get(position);
     }
 
-    public void  addFragment (Fragment fragment,String title) {
+    public void  addFragment (Fragment fragment,String title, String mealtype) {
 
         lstFragment.add(fragment);
         lstTitles.add(title);
+        lstMealType.add(getMealType());
 
     }
 
