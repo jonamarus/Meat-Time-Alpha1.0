@@ -105,7 +105,7 @@ public class planning extends Fragment implements DatePickerDialog.OnDateSetList
                                       }
                                       });
 
-        //code for the tablayout
+        //code for the tabLayout
 
         tabLayout = (TabLayout)view.findViewById(R.id.planning_tabs);
         viewPager = (ViewPager)view.findViewById(R.id.viewpager);

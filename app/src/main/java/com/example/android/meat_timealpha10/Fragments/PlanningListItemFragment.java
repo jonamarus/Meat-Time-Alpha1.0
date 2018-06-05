@@ -37,8 +37,11 @@ public class PlanningListItemFragment extends Fragment {
         mrecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
         mrecyclerview.setAdapter(recyclerAdapter);
 
-        lstPlanningItem.add(new PlanningItemFragment("Menu A", "keywords", R.drawable.ic_nav_ic_meal));
-        lstPlanningItem.add(new PlanningItemFragment("Menu A", "keywords", R.drawable.ic_nav_ic_meal));
+        lstPlanningItem.add(new PlanningItemFragment("Menu A", "keywords", R.drawable.ic_nav_ic_extra));
+        lstPlanningItem.add(new PlanningItemFragment("Menu B", "keywords", R.drawable.ic_nav_ic_meal));
+        lstPlanningItem.add(new PlanningItemFragment("Menu C", "keywords", R.drawable.ic_nav_ic_home));
+        lstPlanningItem.add(new PlanningItemFragment("Menu D", "keywords", R.drawable.ic_nav_ic_logoff));
+        lstPlanningItem.add(new PlanningItemFragment("Menu E", "keywords", R.drawable.ic_nav_ic_planning));
         Log.wtf("size_of_my_list", Integer.toString(lstPlanningItem.size()));
         recyclerAdapter.notifydatasetchanged();
         Log.d("debugMode", "The onCreateView method has been launched");

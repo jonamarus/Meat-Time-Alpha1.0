@@ -20,6 +20,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerViewAdapte
 Context mContext ;
 List<PlanningItemFragment> mData;
 int mExpandedPosition = -1;
+int previousExpandedPosition = -1;
 
     public RecyclerViewAdapter(Context mContext, List<PlanningItemFragment> mData) {
         this.mContext = mContext;
@@ -42,13 +43,19 @@ int mExpandedPosition = -1;
         holder.tv_keywords.setText(mData.get(position).getKeywords());
         holder.img_photo.setImageResource(mData.get(position).getPhoto());
 
+    // Code for expanding the items in recyclerview
+
         final boolean isExpanded = position==mExpandedPosition;
         holder.expandedView.setVisibility(isExpanded?View.VISIBLE:View.GONE);
         holder.itemView.setActivated(isExpanded);
+        if (isExpanded)
+            previousExpandedPosition = position;
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mExpandedPosition = isExpanded ? -1:position;
+                notifyItemChanged(previousExpandedPosition);
                 notifyItemChanged(position);
             }
         });
