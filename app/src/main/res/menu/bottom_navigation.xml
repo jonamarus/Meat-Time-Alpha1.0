@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item android:id="@+id/ingredients" android:enabled="true" android:title="ingredients" ></item>
+    <item android:id="@+id/kcal" android:enabled="true"   android:title="kcal" ></item>
+    <item android:id="@+id/additem" android:enabled="true"   android:title="add" ></item>
+
+</menu>
