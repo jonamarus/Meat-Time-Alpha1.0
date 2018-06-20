@@ -11,14 +11,15 @@
     <Button
         android:id="@+id/chooseDate"
         style="@style/Widget.AppCompat.Button.Borderless.Colored"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="5dp"
+
         android:layout_centerHorizontal="true"
         android:elevation="0dp"
         android:hint="Tap to select a date!"
-        android:textColorHint="@color/blue"
+        android:textColorHint="@color/white"
+        android:background="@color/blue"
 
         android:textSize="20sp" />
 
@@ -28,7 +29,8 @@
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_below="@id/chooseDate"
-        android:textColor="@color/blue" />
+        android:textColor="@color/white"
+        android:background="@color/blue"/>
 
     <android.support.v7.widget.LinearLayoutCompat
         android:id="@+id/compatlayout"
@@ -45,8 +47,12 @@
         android:layout_height="wrap_content"
         app:tabMode="fixed"
         app:tabGravity="fill"
-        app:tabTextColor="@color/blue"
-        app:tabSelectedTextColor="@color/blue"
+        app:tabTextColor="@color/white"
+        app:tabSelectedTextColor="@color/white"
+        app:tabBackground="@color/blue"
+        app:tabIndicatorHeight="5dp"
+        app:tabIndicatorColor="@color/bnav"
+
         />
 
     <android.support.v4.view.ViewPager
@@ -62,9 +68,10 @@
     <android.support.design.widget.BottomNavigationView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-
         android:layout_alignParentBottom="true"
         app:menu="@menu/bottom_navigation"
-        app:itemBackground="@color/blue"/>
+        app:itemBackground="@color/blue"
+        app:itemIconTint="@color/white"
+        />
 
 </RelativeLayout>
