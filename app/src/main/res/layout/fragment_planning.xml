@@ -71,7 +71,8 @@
         android:layout_alignParentBottom="true"
         app:menu="@menu/bottom_navigation"
         app:itemBackground="@color/blue"
-        app:itemIconTint="@color/white"
+        app:itemIconTint="@drawable/selector_bottomnavigationicon"
+
         />
 
 </RelativeLayout>

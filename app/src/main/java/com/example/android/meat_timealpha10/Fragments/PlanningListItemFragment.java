@@ -3,6 +3,7 @@ package com.example.android.meat_timealpha10.Fragments;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -21,6 +22,7 @@ public class PlanningListItemFragment extends Fragment {
     private RecyclerView mrecyclerview;
     private List<PlanningItemFragment> lstPlanningItem;
 
+
     public PlanningListItemFragment() {
 
     }
@@ -34,8 +36,12 @@ public class PlanningListItemFragment extends Fragment {
         mrecyclerview = v.findViewById(R.id.RCview);
         RecyclerViewAdapter recyclerAdapter = new RecyclerViewAdapter(getActivity(),lstPlanningItem);
         LinearLayoutManager llm= new LinearLayoutManager(getActivity());
-        mrecyclerview.setLayoutManager(new LinearLayoutManager(getActivity()));
+        mrecyclerview.setLayoutManager(llm);
         mrecyclerview.setAdapter(recyclerAdapter);
+
+        DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(mrecyclerview.getContext(),
+                llm.getOrientation());
+        mrecyclerview.addItemDecoration(dividerItemDecoration);
 
         lstPlanningItem.add(new PlanningItemFragment("Menu A", "keywords", R.drawable.ic_nav_ic_extra));
         lstPlanningItem.add(new PlanningItemFragment("Menu B", "keywords", R.drawable.ic_nav_ic_meal));

@@ -11,6 +11,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.support.v7.widget.DividerItemDecoration;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -129,6 +130,8 @@ public class planning extends Fragment implements DatePickerDialog.OnDateSetList
         // remove shadow from the action bar
         // ActionBar actionBar = getSupportActionbar();
         // actionBar.setElevation(0);
+
+
 
 
         return view;
