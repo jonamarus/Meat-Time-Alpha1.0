@@ -3,9 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    tools:context=".Fragments.planning">
+    tools:context=".Fragments.planning"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
 
     <Button
@@ -25,7 +25,6 @@
 
     <TextView
         android:id="@+id/dateGiven"
-        android:textAlignment="center"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:layout_below="@id/chooseDate"
@@ -40,29 +39,48 @@
         android:layout_below="@id/dateGiven">
 
 
+        <android.support.design.widget.TabLayout
+            app:tabIndicatorColor="@color/bnav"
+            app:tabIndicatorHeight="5dp"
+            app:tabBackground="@color/blue"
+            app:tabSelectedTextColor="@color/white"
+            app:tabTextColor="@color/white"
+            app:tabGravity="fill"
+            app:tabMode="fixed"
+            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:id="@+id/planning_tabs">
 
-    <android.support.design.widget.TabLayout
-        android:id="@+id/planning_tabs"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:tabMode="fixed"
-        app:tabGravity="fill"
-        app:tabTextColor="@color/white"
-        app:tabSelectedTextColor="@color/white"
-        app:tabBackground="@color/blue"
-        app:tabIndicatorHeight="5dp"
-        app:tabIndicatorColor="@color/bnav"
-
-        />
-
-    <android.support.v4.view.ViewPager
-        android:layout_height="410dp"
-        android:layout_width="match_parent"
-        android:id="@+id/viewpager"
-        android:overScrollMode="always">
+            <android.support.design.widget.TabItem
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Breakfast"
+                android:id="@+id/BREAKFAST"/>
 
 
-    </android.support.v4.view.ViewPager>
+            <android.support.design.widget.TabItem
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Lunch"
+                android:id="@+id/LUNCH"/>
+
+            <android.support.design.widget.TabItem
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Dinner"
+                android:id="@+id/DINNER"/>
+
+
+        </android.support.design.widget.TabLayout>
+
+        <FrameLayout
+            android:orientation="vertical"
+            android:id="@+id/planning_list_item_frag"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </FrameLayout>
+
     </android.support.v7.widget.LinearLayoutCompat>
 
     <android.support.design.widget.BottomNavigationView

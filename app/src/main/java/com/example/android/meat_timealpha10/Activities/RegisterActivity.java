@@ -67,6 +67,9 @@ public class RegisterActivity extends FragmentActivity implements Validator.Vali
   @BindView(R.id.register_pw_check)
   public EditText passwordCheck;
 
+  @BindView(R.id.error_view)
+  public TextView errorView;
+
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
@@ -76,7 +79,7 @@ public class RegisterActivity extends FragmentActivity implements Validator.Vali
     getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
-    setContentView(R.layout.fragment_register);
+    setContentView(R.layout.activity_register);
 
     context = this.getApplicationContext();
 
@@ -93,7 +96,7 @@ public class RegisterActivity extends FragmentActivity implements Validator.Vali
       }
     });
 
-    restService = RestClient.getClient().create(RestService.class);
+    restService = RestClient.createService(RestService.class);
     validator = new Validator(this);
     validator.setValidationListener(this);
   }
@@ -130,8 +133,13 @@ public class RegisterActivity extends FragmentActivity implements Validator.Vali
           Toast.makeText(context, "Account successfully created",
                   Toast.LENGTH_LONG);
           Intent intent = new Intent(context, LoginActivity.class);
+
+          intent.putExtra("email", email.getText().toString());
+          intent.putExtra("password", password.getText().toString());
+
           startActivity(intent);
         }else {
+          errorView.setVisibility(View.VISIBLE);
           Log.d("REGISTER", response.message());
         }
 
