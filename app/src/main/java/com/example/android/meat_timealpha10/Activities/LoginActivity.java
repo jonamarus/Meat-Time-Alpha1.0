@@ -5,6 +5,7 @@ import android.app.FragmentManager;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -23,11 +24,20 @@ import com.example.android.meat_timealpha10.RestService.RestClient;
 import com.example.android.meat_timealpha10.RestService.RestService;
 import com.example.android.meat_timealpha10.helpers.HelperMethods;
 import com.example.android.meat_timealpha10.helpers.TokenHelper;
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
+import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FacebookAuthProvider;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.mobsandgeeks.saripaar.ValidationError;
 import com.mobsandgeeks.saripaar.Validator;
 import com.mobsandgeeks.saripaar.annotation.Email;
@@ -43,7 +53,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 
-public class LoginActivity extends FragmentActivity implements Validator.ValidationListener{
+public class LoginActivity extends FragmentActivity implements Validator.ValidationListener {
   @BindView(R.id.pwrecovery)
   public Button pwrecovery;
 
@@ -61,7 +71,8 @@ public class LoginActivity extends FragmentActivity implements Validator.Validat
   @Password()
   public EditText password;
 
-  public RestService restService;
+  // public RestService restService;
+  public FirebaseAuth mAuth;
   public Context context;
   public Validator validator;
   public CallbackManager callbackManager;
@@ -69,27 +80,34 @@ public class LoginActivity extends FragmentActivity implements Validator.Validat
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
+    Bundle bundle = getIntent().getExtras();
+
     //set up notitle
     requestWindowFeature(Window.FEATURE_NO_TITLE);
     //set up full screen
     getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-            WindowManager.LayoutParams.FLAG_FULLSCREEN);
+      WindowManager.LayoutParams.FLAG_FULLSCREEN);
     setContentView(R.layout.activity_login);
 
     context = getApplicationContext();
+    mAuth = FirebaseAuth.getInstance();
 
     ButterKnife.bind(this);
-    restService = RestClient.getClient().create(RestService.class);
+
+    if(mAuth.getCurrentUser() != null){
+      toMainActivity();
+    }
 
     validator = new Validator(this);
     validator.setValidationListener(this);
 
     callbackManager = CallbackManager.Factory.create();
+    fbLoginBtn.setReadPermissions("email", "public_profile");
 
     fbLoginBtn.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
       @Override
       public void onSuccess(LoginResult loginResult) {
-        facebookLogin(loginResult.getAccessToken().getToken());
+        facebookLogin(loginResult.getAccessToken());
         Log.d("FACEBOOK", loginResult.getAccessToken().getToken());
       }
 
@@ -103,31 +121,34 @@ public class LoginActivity extends FragmentActivity implements Validator.Validat
 
       }
     });
-    if (HelperMethods.isLoggedIn(context)){
-      toMainActivity();
+
+    if (bundle.containsKey("email") && bundle.containsKey("password")) {
+      email.setText(bundle.getString("email"));
+      password.setText(bundle.getString("password"));
     }
+
   }
 
-  public void facebookLogin(String accessToken){
-    Call<TokenModel> call = restService.facebookLogin(accessToken);
-
-    call.enqueue(new Callback<TokenModel>() {
-      @Override
-      public void onResponse(Call<TokenModel> call, Response<TokenModel> response) {
-        if (response.isSuccessful()) {
-          TokenHelper.setToken(response.body().getToken(), context);
-          Log.d("TOKEN", response.body().getToken());
-          Intent intent = new Intent(context, MainActivity.class);
-          startActivity(intent);
-        }else
-          Log.d("FAILURE", "Failed to login");
-      }
-
-      @Override
-      public void onFailure(Call<TokenModel> call, Throwable t) {
-        Log.d("CallBack", " Throwable is " + t);
-      }
-    });
+  public void facebookLogin(AccessToken token) {
+    AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+    mAuth.signInWithCredential(credential)
+      .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+        @Override
+        public void onComplete(@NonNull Task<AuthResult> task) {
+          if (task.isSuccessful()) {
+            // Sign in success, update UI with the signed-in user's information
+            Log.d("FirebasAUth", "signInWithCredential:success");
+            FirebaseUser user = mAuth.getCurrentUser();
+            //updateUI(user);
+          } else {
+            // If sign in fails, display a message to the user.
+            Log.w("FirebaseAUth", "signInWithCredential:failure", task.getException());
+            Toast.makeText(LoginActivity.this, "Authentication failed.",
+              Toast.LENGTH_SHORT).show();
+            //updateUI(null);
+          }
+        }
+      });
   }
 
   @Override
@@ -157,30 +178,30 @@ public class LoginActivity extends FragmentActivity implements Validator.Validat
   }
 
   @OnClick(R.id.sign_in)
-  public void submitLogin(){
+  public void submitLogin() {
     validator.validate();
   }
 
-  public void login(){
+  public void login() {
     Log.d("LOG IN", "Logging in ");
-    Call<TokenModel> call = restService.login(email.getText().toString(), password.getText().toString());
-    call.enqueue(new Callback<TokenModel>() {
-      @Override
-      public void onResponse(Call<TokenModel> call, Response<TokenModel> response) {
-        if (response.isSuccessful()) {
-          TokenHelper.setToken(response.body().getToken(), context);
-          Log.d("TOKEN", response.body().getToken());
-          Intent intent = new Intent(context, MainActivity.class);
-          startActivity(intent);
-        }else
-          Log.d("FAILURE", "Failed to login");
-      }
-
-      @Override
-      public void onFailure(Call<TokenModel> call, Throwable t) {
-        Log.d("CallBack", " Throwable is " + t);
-      }
-    });
+    mAuth.signInWithEmailAndPassword(email.toString(), password.toString())
+        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if (task.isSuccessful()) {
+                    // Sign in success, update UI with the signed-in user's information
+                    Log.d("FIREBASEAUTH", "signInWithEmail:success");
+                    FirebaseUser user = mAuth.getCurrentUser();
+                    toMainActivity();
+                } else {
+                    // If sign in fails, display a message to the user.
+                    Log.w("FirebaseAuth", "signInWithEmail:failure", task.getException());
+                    Toast.makeText(LoginActivity.this, "Authentication failed.",
+                            Toast.LENGTH_SHORT).show();
+                    //updateUI(null);
+                }
+            }
+        });
   }
 
   @Override
@@ -213,9 +234,9 @@ public class LoginActivity extends FragmentActivity implements Validator.Validat
   @Override
   protected void onResume() {
     super.onResume();
-    if (HelperMethods.isLoggedIn(context)){
+/*    if (HelperMethods.isLoggedIn(context)) {
       toMainActivity();
-    }
+    }*/
   }
 
   @Override
@@ -233,7 +254,7 @@ public class LoginActivity extends FragmentActivity implements Validator.Validat
     }
   }
 
-  private void toMainActivity(){
+  private void toMainActivity() {
     Intent intent = new Intent(context, MainActivity.class);
     startActivity(intent);
   }

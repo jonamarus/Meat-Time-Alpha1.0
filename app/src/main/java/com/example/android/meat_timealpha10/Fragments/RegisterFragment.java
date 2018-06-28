@@ -71,7 +71,7 @@ public class RegisterFragment extends DialogFragment implements Validator.Valida
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    restService = RestClient.getClient().create(RestService.class);
+    restService = RestClient.createService(RestService.class);
     context = getActivity().getApplicationContext();
 
     validator = new Validator(this);
@@ -129,6 +129,7 @@ public class RegisterFragment extends DialogFragment implements Validator.Valida
           Log.d("REGISTER", "User created successfuly");
           Toast.makeText(context, "Account successfully created",
                   Toast.LENGTH_LONG);
+
 
           dismiss();
         }else {

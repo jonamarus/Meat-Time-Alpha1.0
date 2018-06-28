@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "531333527700",
+    "firebase_url": "https://meat-time.firebaseio.com",
+    "project_id": "meat-time",
+    "storage_bucket": "meat-time.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:531333527700:android:514516653f9cc776",
+        "android_client_info": {
+          "package_name": "com.example.android.meat_timealpha10"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "531333527700-g5im6dc1r3s5nh9eg996bvh53e5q1eml.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA1wHdqX6sW5Xmj_-wbaiumGg1pG5PSc-s"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

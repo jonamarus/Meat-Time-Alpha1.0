@@ -55,7 +55,7 @@ public class PasswordResetFragment extends DialogFragment implements Validator.V
   public void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
 
-    restService = RestClient.getClient().create(RestService.class);
+    restService = RestClient.createService(RestService.class);
     context = getActivity().getApplicationContext();
 
     validator = new Validator(this);
